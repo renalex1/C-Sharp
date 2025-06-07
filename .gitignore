@@ -1,0 +1,48 @@
+# Build artifacts
+bin/
+obj/
+out/
+
+# VS Code settings
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+
+# Rider (если вдруг используется)
+.idea/
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.assets.json
+
+# Dotnet CLI
+*.db
+*.sqlite
+
+# Environment files
+.env
+.env.*
+
+# Coverage tools
+coverage/
+*.lcov
+*.coverage
+*.coveragexml
+
+# Test results
+TestResults/
