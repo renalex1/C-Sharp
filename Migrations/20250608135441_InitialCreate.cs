@@ -19,11 +19,11 @@ namespace api.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     symbol = table.Column<string>(type: "text", nullable: false),
-                    companyname = table.Column<string>(type: "text", nullable: false),
+                    company_name = table.Column<string>(type: "text", nullable: false),
                     purchase = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    lastdiv = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    last_div = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     industry = table.Column<string>(type: "text", nullable: false),
-                    marketcap = table.Column<long>(type: "bigint", nullable: false)
+                    market_cap = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,23 +38,23 @@ namespace api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     title = table.Column<string>(type: "text", nullable: false),
                     content = table.Column<string>(type: "text", nullable: false),
-                    createdon = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    stockid = table.Column<int>(type: "integer", nullable: true)
+                    created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    stock_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_comments", x => x.id);
                     table.ForeignKey(
-                        name: "FK_comments_stock_stockid",
-                        column: x => x.stockid,
+                        name: "FK_comments_stock_stock_id",
+                        column: x => x.stock_id,
                         principalTable: "stock",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_comments_stockid",
+                name: "IX_comments_stock_id",
                 table: "comments",
-                column: "stockid");
+                column: "stock_id");
         }
 
         /// <inheritdoc />

@@ -12,7 +12,7 @@ using api.DataBase;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250607222842_InitialCreate")]
+    [Migration("20250608135441_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,11 +41,11 @@ namespace api.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("createdon");
+                        .HasColumnName("created_on");
 
                     b.Property<int?>("StockId")
                         .HasColumnType("integer")
-                        .HasColumnName("stockid");
+                        .HasColumnName("stock_id");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -71,7 +71,7 @@ namespace api.Migrations
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("companyname");
+                        .HasColumnName("company_name");
 
                     b.Property<string>("Industry")
                         .IsRequired()
@@ -80,11 +80,11 @@ namespace api.Migrations
 
                     b.Property<decimal>("LastDiv")
                         .HasColumnType("decimal(18,2)")
-                        .HasColumnName("lastdiv");
+                        .HasColumnName("last_div");
 
                     b.Property<long>("MarketCap")
                         .HasColumnType("bigint")
-                        .HasColumnName("marketcap");
+                        .HasColumnName("market_cap");
 
                     b.Property<decimal>("Purchase")
                         .HasColumnType("decimal(18,2)")

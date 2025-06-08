@@ -14,15 +14,42 @@ namespace api.DataBase
         {
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
-                entity.SetTableName(entity.GetTableName()!.ToLower());
+                // Set table name to lowercase feature/controllers
+                entity.SetTableName(ToSnakeCase(entity.GetTableName()!));
 
                 foreach (var property in entity.GetProperties())
                 {
-                    property.SetColumnName(property.Name.ToLower());
+                    // Convert column names to snake_case
+                    property.SetColumnName(ToSnakeCase(property.Name));
                 }
             }
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        // Helper method to convert PascalCase to snake_case
+        private static string ToSnakeCase(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return input;
+
+            var builder = new System.Text.StringBuilder();
+            for (int i = 0; i < input.Length; i++)
+            {
+                var c = input[i];
+                if (char.IsUpper(c))
+                {
+                    if (i > 0)
+                        builder.Append('_');
+                    builder.Append(char.ToLowerInvariant(c));
+                }
+                else
+                {
+                    builder.Append(c);
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }
