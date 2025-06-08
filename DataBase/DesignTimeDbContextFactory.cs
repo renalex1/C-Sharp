@@ -8,7 +8,6 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<Applicatio
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDBContext>();
 
-        // ✅ Вставляем реальную строку подключения вручную, или читаем из конфига
         var connectionString = "Host=localhost;Port=5433;Database=finshark;Username=root;Password=123456";
         optionsBuilder.UseNpgsql(connectionString);
 
