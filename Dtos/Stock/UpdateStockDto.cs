@@ -2,7 +2,7 @@ using System;
 
 namespace api.Dtos.Stock
 {
-    public class StockDto : BaseStockDto
+    public class UpdateStockRequestDto : BaseStockDto
     {
         public int Id { get; set; }
     }
