@@ -1,4 +1,6 @@
 using api.DataBase;
+using api.Interfaces;
+using api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseNpgsql(connectionString);
 });
 
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+
 var app = builder.Build();
 
 // Configure middleware
@@ -22,7 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection(); 
+app.UseHttpsRedirection();
 
 app.MapControllers();
 
