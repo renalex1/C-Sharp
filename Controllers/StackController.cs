@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using api.DataBase;
 using api.Dtos.Stock;
 using api.Interfaces;
 using api.Mappers;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -16,7 +17,8 @@ namespace api.Controllers
     public class StockController : ControllerBase
     {
         private readonly IStockRepository _stockRepo;
-        public StockController(ApplicationDBContext context, IStockRepository stockRepo)
+
+        public StockController(IStockRepository stockRepo)
         {
             _stockRepo = stockRepo;
         }
@@ -38,7 +40,7 @@ namespace api.Controllers
 
             if (stock == null)
             {
-                return NotFound();
+                return NotFound("Stock not found");
             }
 
             return Ok(stock.ToStockDto());
@@ -68,7 +70,7 @@ namespace api.Controllers
 
             if (stockModel == null)
             {
-                return NotFound();
+                return NotFound("Stock not found");
             }
 
             return Ok(stockModel.ToStockDto());
@@ -81,7 +83,7 @@ namespace api.Controllers
 
             if (stockModel == null)
             {
-                return NotFound();
+                return NotFound("Stock not found");
             }
 
             return NoContent();

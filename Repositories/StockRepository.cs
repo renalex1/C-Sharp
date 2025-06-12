@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using api.DataBase;
 using api.Dtos.Stock;
 using api.Interfaces;
 using api.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories
@@ -19,12 +21,12 @@ namespace api.Repositories
 
         public async Task<List<Stock>> GetAllAsync()
         {
-            return await _context.Stock.ToListAsync();
+            return await _context.Stock.Include(c => c.Comments).ToListAsync();
         }
 
         public async Task<Stock?> FindByIdAsync(int id)
         {
-            return await  _context.Stock
+            return await _context.Stock.Include(c => c.Comments)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -44,15 +46,15 @@ namespace api.Repositories
                 return null;
             }
 
-            existingStock .Symbol = stockDto.Symbol;
-            existingStock .CompanyName = stockDto.CompanyName;
-            existingStock .Purchase = stockDto.Purchase;
-            existingStock .LastDiv = stockDto.LastDiv;
-            existingStock .Industry = stockDto.Industry;
-            existingStock .MarketCap = stockDto.MarketCap;
+            existingStock.Symbol = stockDto.Symbol;
+            existingStock.CompanyName = stockDto.CompanyName;
+            existingStock.Purchase = stockDto.Purchase;
+            existingStock.LastDiv = stockDto.LastDiv;
+            existingStock.Industry = stockDto.Industry;
+            existingStock.MarketCap = stockDto.MarketCap;
 
             await _context.SaveChangesAsync();
-            return existingStock ;
+            return existingStock;
         }
 
         public async Task<Stock?> DeleteAsync(int id)
@@ -66,6 +68,11 @@ namespace api.Repositories
             _context.Stock.Remove(stockModel);
             await _context.SaveChangesAsync();
             return stockModel;
+        }
+
+        public async Task<bool> StockExist(int id)
+        {
+            return await _context.Stock.AnyAsync(x => x.Id == id); 
         }
     }
 }
