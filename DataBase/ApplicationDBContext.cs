@@ -29,6 +29,10 @@ namespace api.DataBase
 
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
+
             modelBuilder.Entity<Portfolio>(x => x.HasKey(y => new
             {
                 y.UserId,
