@@ -8,12 +8,14 @@ using api.Dtos.Comment;
 using api.Interfaces;
 using api.Mappers;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
     [Route("api/comments")]
     [ApiController]
+    [Authorize]
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepository _commentRepo;
@@ -114,7 +116,7 @@ namespace api.Controllers
 
             return NoContent();
 
-            
+
         }
     }
 }
