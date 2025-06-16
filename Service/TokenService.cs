@@ -23,7 +23,7 @@ namespace api.Service
         public TokenService(IConfiguration config)
         {
             _config = config;
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SingingKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
             _expireDays = int.TryParse(_config["JWT:ExpireDays"], out var days) ? days : 7;
         }
 
