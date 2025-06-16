@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    [Route("api/stacks")]
+    [Route("api/stocks")]
     [ApiController]
     public class StockController : ControllerBase
     {

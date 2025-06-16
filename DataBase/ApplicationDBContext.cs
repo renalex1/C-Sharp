@@ -9,8 +9,9 @@ namespace api.DataBase
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
 
-        public DbSet<Stock> Stock { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,22 @@ namespace api.DataBase
             }
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Portfolio>(x => x.HasKey(y => new
+            {
+                y.UserId,
+                y.StockId
+            }));
+
+            modelBuilder.Entity<Portfolio>()
+                .HasOne(u => u.User)
+                .WithMany(u => u.Portfolios)
+                .HasForeignKey(y => y.UserId);
+
+            modelBuilder.Entity<Portfolio>()
+                .HasOne(u => u.Stock)
+                .WithMany(u => u.Portfolios)
+                .HasForeignKey(y => y.StockId);
 
             List<IdentityRole> roles = new List<IdentityRole>
             {
