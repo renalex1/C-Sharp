@@ -28,6 +28,10 @@ namespace api.DataBase
 
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
+
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole {
