@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    [Route("api/stacks")]
+    [Route("api/stocks")]
     [ApiController]
     [Authorize]
     public class StockController : ControllerBase
